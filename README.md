@@ -1,29 +1,15 @@
 ## Usage
 
-### Config
-```yaml
-- PROJECT_ID: 
-- location:
-- API_KEY:
-- radius:
-- simple_ratio threshold:
-
-  
-# secondary
-- spacy_model: 
-
-# API endpoints
-- geocode_url: "https://maps.googleapis.com/maps/api/geocode/json"
-- autocomplete_url: 'https://maps.googleapis.com/maps/api/place/autocomplete/json'  ## or places url
-
-```
-
 ```python 
-from truthfulnesscheck import valdate_places
+import json
+from truthfulnesscheck.validate_places import places_check
 
-validate_places(
-    city="city_name_along_with_state_and_country_name",
-    text="plain_text_content"
-) 
+city_name = "Mumbai,MH,India"
+text_content = "The seven
+
+result = places_check(input_text=text_content,
+                      city=city_name)
+                      
+print("result: \n", json.dumps(result, indent=2))
 ```
 

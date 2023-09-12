@@ -1,6 +1,6 @@
 # config.yaml
 MAPS:
-  API_KEY: "AIzaSyBu6IxQ9U8bDIp2P-_u6O98ZarivhH4L4w"
+  API_KEY: ""
   radius: 300
   GEOCODE_URL: "https://maps.googleapis.com/maps/api/geocode/json"
   AUTOCOMPLETE_URL: "https://maps.googleapis.com/maps/api/place/autocomplete/json"
@@ -30,8 +30,8 @@ LLM:
     input_text: Does Winnipeg Art Gallery present in the city WINNIPEG,MANITOBA,CANADA ?
     output: {"place_exist": True,"description": "The Winnipeg Art Gallery is an art museum in Winnipeg, Manitoba, Canada."}
     input_text: Does paris golf course present in the city PARIS, ILLINOIS,UNITED STATES OF AMERICA ?
-    output : {"place_exist": False,"descritpion" : "No such place exist in the city Paris, ILLINOIS,UNITED STATES OF AMERICA."}
-    input_text: Does Kohlapur present in the city Pune,India ?
-    output : {"place_exist": False,"descritpion" : "kohlapur is not near to pune."}
+    output : {"place_exist": False,"description" : "No such place exist in the city Paris, ILLINOIS,UNITED STATES OF AMERICA."}
+    input_text: Does Kolhapur present in the city Pune,India ?
+    output : {"place_exist": False,"description" : "kolhapur is not near to pune."}
     input_text: Does The Carolina Panthers Stadium present in the city CHARLOTTE,NORTH CAROLINA,UNITED STATES OF AMERICA ?
     output : {"place_exist: True,"description": "It is the home facility and headquarters of the Carolina Panthers of the National Football League."}

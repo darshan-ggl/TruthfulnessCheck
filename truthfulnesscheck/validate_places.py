@@ -6,6 +6,7 @@ from truthfulnesscheck.utils.maps_util import places_existence
 from truthfulnesscheck.utils.string_matcher_util import fuzzy_wuzzy_check
 from truthfulnesscheck.utils.llm_util import llm_place_check
 
+circle_radius = config['MAPS']['radius']
 spacy_model_name = config['Spacy']['spacy_model']
 simple_ratio_threshold = config["FuzzyWuzzy"]["simple_ratio_threshold"]
 
@@ -18,7 +19,7 @@ def validate_place(plc_resp, current_place):
     return {"place_exist": False, 'description': "place does not exist"}
 
 
-def places_check(input_text, city, radius, filter_place_type='establishment'):
+def places_check(input_text, city, radius=circle_radius, filter_place_type='establishment'):
     # LLM initialization
     llm = TextGenerationModel.from_pretrained("text-bison@001")
 
