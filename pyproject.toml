@@ -1,0 +1,26 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "truthfulnesscheck"
+version = "0.0.2"
+description = "A tool for the validation of places references"
+authors = ["Darshan Barapatre <mrdarshan@google.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "2.1.0"
+requests = "2.31.0"
+pyyaml = "6.0.1"
+nltk = "3.8.1"
+spacy = "3.6.1"
+spacy-transformers = "1.2.5"
+geopy = "2.4.0"
+fuzzywuzzy = "0.18.0"
+python-Levenshtein = "0.21.1"
+google-cloud-aiplatform = "1.32.0"
+vertexai = "0.0.1"
+
+[tool.poetry.dev-dependencies]
+# Add development dependencies here

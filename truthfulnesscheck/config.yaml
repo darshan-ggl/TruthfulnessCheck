@@ -1,0 +1,37 @@
+# config.yaml
+MAPS:
+  API_KEY: "AIzaSyBu6IxQ9U8bDIp2P-_u6O98ZarivhH4L4w"
+  radius: 300
+  GEOCODE_URL: "https://maps.googleapis.com/maps/api/geocode/json"
+  AUTOCOMPLETE_URL: "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+
+FuzzyWuzzy:
+  simple_ratio_threshold: 80
+
+Spacy:
+  spacy_model: "en_core_web_trf"
+  spacy_target_labels:
+    - GPE
+    - FAC
+    - LOC
+    - ORG
+
+LLM:
+  PROJECT_ID: "jarvis-365810"
+  location: "us-central1"
+  initial_query_prompt: >
+    You are an expert cartographer and you know all places which exist on Earth.
+    You have been assigned the task to validate if the place actually exists and is strictly within the near vicinity of the city mentioned.
+    Also, provide a description of the place if it exists near the city.
+    Please strictly mention in the description that the place does not exist if it is not near the city.
+    Please do not make up places and only give an answer based on an existing place.
+    The description should be a short description of 1-2 lines and should strictly be within 20-30 words only.
+    You must strictly follow the below input and output format-
+    input_text: Does Winnipeg Art Gallery present in the city WINNIPEG,MANITOBA,CANADA ?
+    output: {"place_exist": True,"description": "The Winnipeg Art Gallery is an art museum in Winnipeg, Manitoba, Canada."}
+    input_text: Does paris golf course present in the city PARIS, ILLINOIS,UNITED STATES OF AMERICA ?
+    output : {"place_exist": False,"descritpion" : "No such place exist in the city Paris, ILLINOIS,UNITED STATES OF AMERICA."}
+    input_text: Does Kohlapur present in the city Pune,India ?
+    output : {"place_exist": False,"descritpion" : "kohlapur is not near to pune."}
+    input_text: Does The Carolina Panthers Stadium present in the city CHARLOTTE,NORTH CAROLINA,UNITED STATES OF AMERICA ?
+    output : {"place_exist: True,"description": "It is the home facility and headquarters of the Carolina Panthers of the National Football League."}
