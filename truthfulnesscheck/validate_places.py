@@ -1,6 +1,6 @@
-from truthfulnesscheck.config import config
 from vertexai.language_models import TextGenerationModel
 
+from truthfulnesscheck.config import config
 from truthfulnesscheck.utils.NER_util import places_extraction
 from truthfulnesscheck.utils.maps_util import places_existence
 from truthfulnesscheck.utils.string_matcher_util import fuzzy_wuzzy_check
@@ -19,32 +19,28 @@ def validate_place(plc_resp, current_place):
     return {"place_exist": False, 'description': "place does not exist"}
 
 
-def places_check(input_text, city, radius=circle_radius, filter_place_type='establishment'):
+def places_check(city, place, radius=circle_radius, filter_place_type='establishment'):
     # LLM initialization
     llm = TextGenerationModel.from_pretrained("text-bison@001")
 
     places_validation = {}
 
-    # Places captured
-    places, place_dict = places_extraction(input_text, spacy_model=spacy_model_name)
+    print(f"For: {place} check in {city}")
+    # Maps api and radius check
+    plc_resp = places_existence(place=place, centric_city=city, radius=radius, strictbounds=True,
+                                types=filter_place_type)
 
-    for place in places:
-        print(f"For: {place} check in {city}")
-        # Maps api and radius check
-        plc_resp = places_existence(place=place, centric_city=city, radius=radius, strictbounds=True,
-                                    types=filter_place_type)
+    # Validate place with fuzzywuzzy
+    validation_resp = validate_place(plc_resp, place)
 
-        # Validate place with fuzzywuzzy
-        validation_resp = validate_place(plc_resp, place)
-
-        # Maps validation
-        if validation_resp['place_exist']:
-            places_validation[place] = validation_resp
-        else:
-            # LLM validation
-            llm_resp = llm_place_check(place=place, city=city, model=llm)
-            print("llm_resp: ", llm_resp)
-            llm_validation = eval(llm_resp)
-            places_validation[place] = llm_validation
+    # Maps validation
+    if validation_resp['place_exist']:
+        places_validation[place] = validation_resp
+    else:
+        # LLM validation
+        llm_resp = llm_place_check(place=place, city=city, model=llm)
+        print("llm_resp: ", llm_resp)
+        llm_validation = eval(llm_resp)
+        places_validation[place] = llm_validation
 
     return places_validation
